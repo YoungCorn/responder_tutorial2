@@ -2,9 +2,10 @@ import responder
 
 api = responder.API()
 
-@api.route('/')
-def hello_world(req, resp):
-    resp.text = 'hello, world!'
+@api.route('/{word}')
+class Hello:
+    def on_get(self, req, resp, word):
+        resp.content = api.template("index.html", word=word)
 
 if __name__ == '__main__':
     api.run()
